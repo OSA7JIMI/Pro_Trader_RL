@@ -20,4 +20,5 @@ Source: https://www.sciencedirect.com/science/article/pii/S0957417424013319#s003
 4. Set your definition of a good return in environment.py and pro_trader.ipynb (default is 10%)
 5. Run get_training_data.ipynb using the S&P 500 dataset (or the S&P 400 if you prefer)
 6. Run the model training notebooks with your desired hyperparameters and number of epochs
-7. Run pro_trader.ipynb (convert to .py for use in task scheduler)
+7. Find online (or write) a python file that makes API function calls to your exchange, and rename it as "exchange_api.py"
+9. Run pro_trader.ipynb (convert to .py for use in task scheduler)
