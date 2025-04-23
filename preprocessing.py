@@ -79,7 +79,7 @@ def generate_signals(data):
     return data.dropna() # drops 369 rows to increase computational speed 
 
 def signal_returns(data):
-    fee = 0.003
+    fee = 0.001
     data = data.reset_index()
 
     signal_returns = []
@@ -102,7 +102,7 @@ def signal_returns(data):
     return data
 
 def sell_returns(data):
-    fee = 0.01
+    fee = 0.001
     df = pd.DataFrame()
     for i in range(len(data)-1):
         row = data.iloc[i]
