@@ -2,7 +2,7 @@
 
 Source: https://www.sciencedirect.com/science/article/pii/S0957417424013319#s003
 
-## Disclaimer: This repository should not be taken as financial advice. Please read the source paper and conduct your own research on stock trading and reinforcement learning before proceeding.
+## Disclaimer: This repository should not be taken as financial advice. Please read the source paper and conduct your own research on stock trading and reinforcement learning before proceeding. I am not in any way associated or affiliated with the authors of the source paper.
 
 ## Usage guide
 
