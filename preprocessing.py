@@ -3,8 +3,8 @@ import pandas as pd
 pd.options.mode.chained_assignment = None
 import numpy as np
         
-def get_data(symbol, start):
-    df = yf.download(symbol, start = start, auto_adjust = False,multi_level_index=False)
+def get_data(symbol, start, end):
+    df = yf.download(symbol, start = start, end = end, auto_adjust = False,multi_level_index=False, progress = False)
     df.columns = [col.lower() for col in df.columns.values]
     df = df.rename(columns={'volume': 'volumefrom'})
     df.index = df.index.rename('index')
@@ -79,7 +79,7 @@ def generate_signals(data):
     return data.dropna() # drops 369 rows to increase computational speed 
 
 def signal_returns(data):
-    fee = 0.001
+    fee = 0.003
     data = data.reset_index()
 
     signal_returns = []
@@ -102,7 +102,7 @@ def signal_returns(data):
     return data
 
 def sell_returns(data):
-    fee = 0.001
+    fee = 0.01
     df = pd.DataFrame()
     for i in range(len(data)-1):
         row = data.iloc[i]
@@ -149,9 +149,9 @@ def normalize_data(data):
     
     return normalized
     
-def wrapper_func(symbol,start):
+def wrapper_func(symbol,start,end):
     try:
-        data = get_data(symbol,start)
+        data = get_data(symbol,start,end)
         data = generate_variables(data)
         data = generate_signals(data)
         buy_data = signal_returns(data)
@@ -174,7 +174,7 @@ def wrapper_func(symbol,start):
 
 def donchian_signals(symbol):
     try:
-        data = yf.download(symbol, period = '1mo', auto_adjust = False, multi_level_index=False)
+        data = yf.download(symbol, period = '1mo', auto_adjust = False, multi_level_index=False, progress = False)
         data.columns = [col.lower() for col in data.columns.values]
         data['donchian_upper'] = data['high'].rolling(20).max()
         data['donchian_lower'] = data['low'].rolling(20).min()
@@ -182,5 +182,15 @@ def donchian_signals(symbol):
         data['sell_signal'] = data['low'] <= data['donchian_lower']
     except:
         print(f'{symbol} not found')
-        return None, None
+        return None
     return data
+
+def test_wrapper(symbol, start, end):    
+    try:
+        data = get_data(symbol,start,end)
+        data = generate_variables(data)
+        data = generate_signals(data)
+        return normalize_data(data).dropna()
+    except:
+        print(f'{symbol} not found')
+        return None
