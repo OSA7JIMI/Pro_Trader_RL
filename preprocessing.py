@@ -102,7 +102,7 @@ def signal_returns(data):
     return data
 
 def sell_returns(data):
-    fee = 0.01
+    fee = 0.003
     df = pd.DataFrame()
     for i in range(len(data)-1):
         row = data.iloc[i]
